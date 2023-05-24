@@ -30,6 +30,10 @@ Route::post('register', [App\Http\Controllers\Frontend\AuthController::class, 'r
 
 Route::post('logout', [App\Http\Controllers\Frontend\AuthController::class, 'logout'])->name('user.logout');
 
+Route::get('profile/room', [App\Http\Controllers\Frontend\RoomController::class, 'index'])->name('user.room');
+
+Route::get('profile/room/create', [App\Http\Controllers\Frontend\RoomController::class, 'create'])->name('user.room.create');
+
 
 
 Route::prefix('admin')->group(function () {
@@ -37,4 +41,8 @@ Route::prefix('admin')->group(function () {
 	Route::get('/', [App\Http\Controllers\Backend\HomeController::class, 'index'])->name('dashboard');
 
 	Route::resource('department', App\Http\Controllers\Backend\DepartmentController::class, ['names'=> 'admin.department']);
+
+	Route::resource('research-area', App\Http\Controllers\Backend\ResearchAreaController::class, ['names'=> 'admin.research-area']);
+
+	Route::resource('topic', App\Http\Controllers\Backend\TopicController::class, ['names'=> 'admin.topic']);
 });

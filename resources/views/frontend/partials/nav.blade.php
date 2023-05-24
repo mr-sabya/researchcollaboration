@@ -47,6 +47,8 @@
 
             <div class="ms-4">
                 @if(Auth::user())
+                <a href="{{ route('profile')}}" class="btn custom-btn custom-border-btn">Profile</a>
+
                 <a href="{{ route('user.logout')}}" class="btn custom-btn custom-border-btn" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Logout</a>
 

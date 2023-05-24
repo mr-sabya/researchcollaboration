@@ -21,6 +21,18 @@
 					<i class="icon-speedometer"></i><span> Department</span>
 				</a>                
 			</li>
+
+			<li class="{{ Route::is('admin.research-area.index') ? 'active' : ''}} treeview">
+				<a class="waves-effect waves-dark" href="{{ route('admin.research-area.index') }}">
+					<i class="icon-speedometer"></i><span> Research Area</span>
+				</a>                
+			</li>
+
+			<li class="{{ Route::is('admin.topic.index') ? 'active' : ''}} treeview">
+				<a class="waves-effect waves-dark" href="{{ route('admin.topic.index') }}">
+					<i class="icon-speedometer"></i><span> Topics</span>
+				</a>                
+			</li>
 			<li class="nav-level">--- More</li>
 		</ul>
 	</section>

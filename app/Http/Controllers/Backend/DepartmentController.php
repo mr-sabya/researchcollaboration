@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return view('backend.department.index');
+        $departments = Department::orderBy('id', 'DESC')->get();
+        return view('backend.department.index', compact('departments'));
     }
 
     /**
@@ -35,7 +37,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'string|required|unique:departments|max:255',
+        ]);
+
+        $department =  new Department;
+        $department->name = $request->name;
+        $department->save();
+
+        return redirect()->route('admin.department.index');
     }
 
     /**
@@ -57,7 +67,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = Department::findOrFail(intval($id));
+        return view('backend.department.edit', compact('department'));
     }
 
     /**
@@ -69,7 +80,23 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $department = Department::findOrFail(intval($id));
+
+        if($department->name == $request->name){
+            $request->validate([
+                'name' => 'bail|required|max:255',
+            ]);
+        }else{
+            $request->validate([
+                'name' => 'bail|required|max:255|unique:departments',
+            ]);
+        }
+        
+
+        $department->name = $request->name;
+        $department->save();
+
+        return redirect()->route('admin.department.index');
     }
 
     /**

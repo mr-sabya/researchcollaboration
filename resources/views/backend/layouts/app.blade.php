@@ -97,6 +97,9 @@
 	<script type="text/javascript" src="{{ asset('assets/backend/pages/dashboard.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/backend/pages/elements.js') }}"></script>
 	<script src="{{ asset('assets/backend/js/menu.min.js') }}"></script>
+
+
+	@yield('scripts')
 	
 
 </body>

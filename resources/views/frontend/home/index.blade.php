@@ -187,7 +187,7 @@
 </section>
 
 
-<section class="latest-podcast-section section-padding pb-0" id="section_2">
+<!-- <section class="latest-podcast-section section-padding pb-0" id="section_2">
     <div class="container">
         <div class="row justify-content-center">
 
@@ -361,7 +361,7 @@
 
         </div>
     </div>
-</section>
+</section> -->
 
 
 <section class="topics-section section-padding pb-0" id="section_3">
@@ -374,17 +374,18 @@
                 </div>
             </div>
 
+            @foreach($topics as $topic)
             <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                 <div class="custom-block custom-block-overlay">
                     <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="{{ url('assets/frontend/images/topics/physician-consulting-his-patient-clinic.jpg') }}"
+                        <img src="{{ url('upload/images', $topic->image) }}"
                         class="custom-block-image img-fluid" alt="">
                     </a>
 
                     <div class="custom-block-info custom-block-overlay-info">
                         <h5 class="mb-1">
                             <a href="listing-page.html">
-                                Productivity
+                                {{ $topic->name }}
                             </a>
                         </h5>
 
@@ -392,63 +393,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="{{ url('assets/frontend/images/topics/repairman-doing-air-conditioner-service.jpg') }}"
-                        class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Technician
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0">12 Episodes</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="{{ url('assets/frontend/images/topics/woman-practicing-yoga-mat-home.jpg') }}"
-                        class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Mindfullness
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0">35 Episodes</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block custom-block-overlay">
-                    <a href="detail-page.html" class="custom-block-image-wrap">
-                        <img src="{{ url('assets/frontend/images/topics/delicious-meal-with-sambal-arrangement.jpg') }}"
-                        class="custom-block-image img-fluid" alt="">
-                    </a>
-
-                    <div class="custom-block-info custom-block-overlay-info">
-                        <h5 class="mb-1">
-                            <a href="listing-page.html">
-                                Cooking
-                            </a>
-                        </h5>
-
-                        <p class="badge mb-0">12 Episodes</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+        
 
         </div>
     </div>

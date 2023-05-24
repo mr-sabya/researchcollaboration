@@ -2,14 +2,10 @@
 
 @section('content')
 
-
-
 <header class="header d-flex flex-column justify-content-center align-items-center">
     <div class="container">
         <div class="row">
-
             <div class="col-lg-12 col-12 text-center">
-
                 <h2 class="mb-0">Profile</h2>
             </div>
 
@@ -21,15 +17,11 @@
 <section class="about-section section-padding">
     <div class="container">
         <div class="row">
-
-
             @include('frontend.profile.partials.menu')
-
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="text-center">
                     <img src="{{ $user->getUrlfriendlyAvatar($size=200) }}" class="profile-img">
                     <h3 class="mt-3">{{ Auth::user()->name }}</h3>
-
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -53,9 +45,6 @@
                 </div>
 
             </div>
-
-
-
         </div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-<div class="col-lg-4">
+<div class="col-lg-3">
     <div class="profile-block">
         <ul class="navbar-nav profile-menu">
             <li class="nav-item">
@@ -9,7 +9,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">My Posts</a>
+                <a class="nav-link" href="{{ route('user.room') }}">Research Room</a>
             </li>
         </ul>
     </div>
