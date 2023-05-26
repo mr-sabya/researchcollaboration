@@ -2,7 +2,43 @@
 	color: #0066cc !important;
 }
 
-.profile-img{
+.profile{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.profile-image{
+	width: 200px;
+	position: relative;
+}
+
+.profile-image img{
+	width: 100%;
 	border-radius: 50%;
 	border: 2px solid #0b85ff;
+}
+
+.profile-image .edit{
+	position: absolute;
+	top: 12px;
+	right: 16px;
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #0b85ff;
+}
+
+.profile-section .social{
+	margin-right: 20px;
+}
+
+.profile-section .social i{
+	font-size: 18px; 
+	color: #000;
 }

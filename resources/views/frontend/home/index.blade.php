@@ -17,168 +17,60 @@
                 </div>
 
                 <div class="owl-carousel owl-theme">
+
+                    @foreach($users as $user)
                     <div class="owl-carousel-info-wrap item">
-                        <img src="{{ url('assets/frontend/images/profile/smiling-business-woman-with-folded-hands-against-white-wall-toothy-smile-crossed-arms.jpg') }}"
-                        class="owl-carousel-image img-fluid" alt="">
+                        @if($user->image != null)
+                        <img src="{{ url('upload/images', $user->image) }}" class="owl-carousel-image img-fluid" alt="">
+                        @else
+                        <img src="{{ $user->getUrlfriendlyAvatar($size=200) }}" class="owl-carousel-image img-fluid" alt="">
+                        @endif
 
                         <div class="owl-carousel-info">
                             <h4 class="mb-2">
-                                Candice
-                                <img src="{{ url('assets/frontend/images/verified.png')}}" class="owl-carousel-verified-image img-fluid"
-                                alt="">
+                                <a href="#">{{ str_limit($user->name, $limit = 10, $end = '...') }}</a>
                             </h4>
-
-                            <span class="badge">Storytelling</span>
-
-                            <span class="badge">Business</span>
+                            <span class="badge">
+                                @if($user->r_area != null)
+                                {{ $user->r_area['name'] }}
+                                @else
+                                <span style="color: #878787">Not Set Yet!</span>
+                                @endif
+                            </span>
                         </div>
 
                         <div class="social-share">
                             <ul class="social-icon">
+                                
+                                @if($user->facebook != null)
                                 <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-twitter"></a>
+                                    <a href="{{ $user->facebook }}" target="_blank" class="social-icon-link bi-facebook"></a>
                                 </li>
+                                @endif
 
+                                @if($user->linkedin)
                                 <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-facebook"></a>
+                                    <a href="{{ $user->linkedin }}" target="_blank" class="social-icon-link bi-linkedin"></a>
                                 </li>
+                                @endif
+
+                                @if($user->github)
+                                <li class="social-icon-item">
+                                    <a href="{{ $user->github }}" target="_blank" class="social-icon-link bi-github"></a>
+                                </li>
+                                @endif
+
+                                @if($user->stackoverflow != null)
+                                <li class="social-icon-item">
+                                    <a href="{{ $user->stackoverflow}}" target="_blank" class="social-icon-link bi-stack-overflow"></a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
 
-                    <div class="owl-carousel-info-wrap item">
-                        <img src="{{ url('assets/frontend/images/profile/handsome-asian-man-listening-music-through-headphones.jpg') }}"
-                        class="owl-carousel-image img-fluid" alt="">
-
-                        <div class="owl-carousel-info">
-                            <h4 class="mb-2">
-                                William
-                                <img src="{{ url('assets/frontend/images/verified.png') }}" class="owl-carousel-verified-image img-fluid"
-                                alt="">
-                            </h4>
-
-                            <span class="badge">Creative</span>
-
-                            <span class="badge">Design</span>
-                        </div>
-
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-twitter"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-facebook"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-pinterest"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="owl-carousel-info-wrap item">
-                        <img src="{{ url('assets/frontend/images/profile/cute-smiling-woman-outdoor-portrait.jpg') }}"
-                        class="owl-carousel-image img-fluid" alt="">
-
-                        <div class="owl-carousel-info">
-                            <h4 class="mb-2">Taylor</h4>
-
-                            <span class="badge">Modeling</span>
-
-                            <span class="badge">Fashion</span>
-                        </div>
-
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-twitter"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-facebook"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-pinterest"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="owl-carousel-info-wrap item">
-                        <img src="{{ url('assets/frontend/images/profile/man-portrait.jpg') }}" class="owl-carousel-image img-fluid" alt="">
-
-                        <div class="owl-carousel-info">
-                            <h4 class="mb-2">Nick</h4>
-
-                            <span class="badge">Acting</span>
-                        </div>
-
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-instagram"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-youtube"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="owl-carousel-info-wrap item">
-                        <img src="{{ url('assets/frontend/images/profile/woman-posing-black-dress-medium-shot.jpg') }}"
-                        class="owl-carousel-image img-fluid" alt="">
-
-                        <div class="owl-carousel-info">
-                            <h4 class="mb-2">
-                                Elsa
-                                <img src="{{ url('assets/frontend/images/verified.png') }}" class="owl-carousel-verified-image img-fluid"
-                                alt="">
-                            </h4>
-
-                            <span class="badge">Influencer</span>
-                        </div>
-
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-instagram"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-youtube"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="owl-carousel-info-wrap item">
-                        <img src="{{ url('assets/frontend/images/profile/smart-attractive-asian-glasses-male-standing-smile-with-freshness-joyful-casual-blue-shirt-portrait-white-background.jpg') }}"
-                        class="owl-carousel-image img-fluid" alt="">
-
-                        <div class="owl-carousel-info">
-                            <h4 class="mb-2">Chan</h4>
-
-                            <span class="badge">Education</span>
-                        </div>
-
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-linkedin"></a>
-                                </li>
-
-                                <li class="social-icon-item">
-                                    <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforeach
+                    
                 </div>
             </div>
 
@@ -186,182 +78,6 @@
     </div>
 </section>
 
-
-<!-- <section class="latest-podcast-section section-padding pb-0" id="section_2">
-    <div class="container">
-        <div class="row justify-content-center">
-
-            <div class="col-lg-12 col-12">
-                <div class="section-title-wrap mb-5">
-                    <h4 class="section-title">Lastest episodes</h4>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-                <div class="custom-block d-flex">
-                    <div class="">
-                        <div class="custom-block-icon-wrap">
-                            <div class="section-overlay"></div>
-                            <a href="detail-page.html" class="custom-block-image-wrap">
-                                <img src="{{ url('assets/frontend/images/podcast/11683425_4790593.jpg') }}"
-                                class="custom-block-image img-fluid" alt="">
-
-                                <a href="#" class="custom-block-icon">
-                                    <i class="bi-play-fill"></i>
-                                </a>
-                            </a>
-                        </div>
-
-                        <div class="mt-2">
-                            <a href="#" class="btn custom-btn">
-                                Subscribe
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="custom-block-info">
-                        <div class="custom-block-top d-flex mb-1">
-                            <small class="me-4">
-                                <i class="bi-clock-fill custom-icon"></i>
-                                50 Minutes
-                            </small>
-
-                            <small>Episode <span class="badge">15</span></small>
-                        </div>
-
-                        <h5 class="mb-2">
-                            <a href="detail-page.html">
-                                Modern Vintage
-                            </a>
-                        </h5>
-
-                        <div class="profile-block d-flex">
-                            <img src="{{ url('assets/frontend/images/profile/woman-posing-black-dress-medium-shot.jpg') }}"
-                            class="profile-block-image img-fluid" alt="">
-
-                            <p>
-                                Elsa
-                                <img src="{{ url('assets/frontend/images/verified.png') }}" class="verified-image img-fluid" alt="">
-                                <strong>Influencer</strong>
-                            </p>
-                        </div>
-
-                        <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-
-                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                            <a href="#" class="bi-headphones me-1">
-                                <span>120k</span>
-                            </a>
-
-                            <a href="#" class="bi-heart me-1">
-                                <span>42.5k</span>
-                            </a>
-
-                            <a href="#" class="bi-chat me-1">
-                                <span>11k</span>
-                            </a>
-
-                            <a href="#" class="bi-download">
-                                <span>50k</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="d-flex flex-column ms-auto">
-                        <a href="#" class="badge ms-auto">
-                            <i class="bi-heart"></i>
-                        </a>
-
-                        <a href="#" class="badge ms-auto">
-                            <i class="bi-bookmark"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-12">
-                <div class="custom-block d-flex">
-                    <div class="">
-                        <div class="custom-block-icon-wrap">
-                            <div class="section-overlay"></div>
-                            <a href="detail-page.html" class="custom-block-image-wrap">
-                                <img src="{{ url('assets/frontend/images/podcast/12577967_02.jpg') }}" class="custom-block-image img-fluid"
-                                alt="">
-
-                                <a href="#" class="custom-block-icon">
-                                    <i class="bi-play-fill"></i>
-                                </a>
-                            </a>
-                        </div>
-
-                        <div class="mt-2">
-                            <a href="#" class="btn custom-btn">
-                                Subscribe
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="custom-block-info">
-                        <div class="custom-block-top d-flex mb-1">
-                            <small class="me-4">
-                                <i class="bi-clock-fill custom-icon"></i>
-                                15 Minutes
-                            </small>
-
-                            <small>Episode <span class="badge">45</span></small>
-                        </div>
-
-                        <h5 class="mb-2">
-                            <a href="detail-page.html">
-                                Daily Talk
-                            </a>
-                        </h5>
-
-                        <div class="profile-block d-flex">
-                            <img src="{{ url('assets/frontend/images/profile/handsome-asian-man-listening-music-through-headphones.jpg') }}"
-                            class="profile-block-image img-fluid" alt="">
-
-                            <p>William
-                                <strong>Vlogger</strong>
-                            </p>
-                        </div>
-
-                        <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-
-                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                            <a href="#" class="bi-headphones me-1">
-                                <span>140k</span>
-                            </a>
-
-                            <a href="#" class="bi-heart me-1">
-                                <span>22.4k</span>
-                            </a>
-
-                            <a href="#" class="bi-chat me-1">
-                                <span>16k</span>
-                            </a>
-
-                            <a href="#" class="bi-download">
-                                <span>62k</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="d-flex flex-column ms-auto">
-                        <a href="#" class="badge ms-auto">
-                            <i class="bi-heart"></i>
-                        </a>
-
-                        <a href="#" class="badge ms-auto">
-                            <i class="bi-bookmark"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section> -->
 
 
 <section class="topics-section section-padding pb-0" id="section_3">

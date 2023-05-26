@@ -39,7 +39,7 @@ class TopicController extends Controller
     {
         $request->validate([
             'name' => 'string|required|max:255',
-            'name' => 'string|required|max:255|unique:topics',
+            'slug' => 'string|required|max:255|unique:topics',
             'image' => 'required|image|mimes:jpeg,png,jpg,bmp,gif,svg|max:2048',
         ]);
 
@@ -99,13 +99,13 @@ class TopicController extends Controller
         if($request->slug == $topic->slug){
             $request->validate([
                 'name' => 'string|required|max:255',
-                'name' => 'string|required|max:255',
+                'slug' => 'string|required|max:255',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,bmp,gif,svg|max:2048',
             ]);
         }else{
             $request->validate([
                 'name' => 'string|required|max:255',
-                'name' => 'string|required|max:255|unique:topics',
+                'slug' => 'string|required|max:255|unique:topics',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,bmp,gif,svg|max:2048',
             ]);
         }

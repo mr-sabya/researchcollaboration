@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('index');
 
-Route::get('profile', [App\Http\Controllers\Frontend\ProfileController::class, 'profile'])->name('profile');
+
 
 Route::get('login', [App\Http\Controllers\Frontend\AuthController::class, 'showLoginForm'])->name('user.login.form');
 
@@ -29,6 +29,19 @@ Route::get('register', [App\Http\Controllers\Frontend\AuthController::class, 'sh
 Route::post('register', [App\Http\Controllers\Frontend\AuthController::class, 'register'])->name('user.register');
 
 Route::post('logout', [App\Http\Controllers\Frontend\AuthController::class, 'logout'])->name('user.logout');
+
+
+Route::get('profile', [App\Http\Controllers\Frontend\ProfileController::class, 'profile'])->name('profile');
+
+Route::get('profile/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'updateProfilePage'])->name('profile.edit');
+
+Route::put('profile/update/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'updateProfile'])->name('profile.update');
+
+
+Route::get('profile/edit-image', [App\Http\Controllers\Frontend\ProfileController::class, 'profileImage'])->name('profile.image');
+
+
+Route::post('profile/edit-image/update', [App\Http\Controllers\Frontend\ProfileController::class, 'updateImage'])->name('profile.image.update');
 
 Route::get('profile/room', [App\Http\Controllers\Frontend\RoomController::class, 'index'])->name('user.room');
 
