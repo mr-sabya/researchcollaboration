@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-12 text-center">
-                <h2 class="mb-0">Research Room</h2>
+                <h2 class="mb-0">Chat Room</h2>
             </div>
 
         </div>
@@ -24,16 +24,17 @@
                         <div class="row">
                             <div class="col-lg-12 mb-4">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <h4 class="m-0">30 Rooms</h4>
+                                    <h4 class="m-0">{{ $rooms->count() }} {{ $rooms->count() == 1 ? 'Room' : 'Rooms' }}</h4>
                                     <a class="btn custom-btn smoothscroll" href="{{ route('user.room.create') }}">Create Room</a>
                                 </div>
                             </div>
 
+                            @foreach($rooms as $room)
                             <div class="col-lg-6 col-12 mb-4 mb-lg-0">
                                 <div class="custom-block custom-block-full">
                                     <div class="custom-block-image-wrap">
                                         <a href="detail-page.html">
-                                            <img src="{{ url('assets/frontend/images/podcast/27376480_7326766.jpg') }}" class="custom-block-image img-fluid"
+                                            <img src="{{ url('upload/images', $room->image) }}" class="custom-block-image img-fluid"
                                             alt="">
                                         </a>
                                     </div>
@@ -41,23 +42,23 @@
                                     <div class="custom-block-info">
                                         <h5 class="mb-2">
                                             <a href="detail-page.html">
-                                                Vintage Show
+                                                {{ str_limit($room->name, $limit = 20, $end = '...') }}
                                             </a>
                                         </h5>
 
                                         <div class="profile-block d-flex">
-                                            <img src="{{ url('assets/frontend/images/profile/woman-posing-black-dress-medium-shot.jpg') }}"
+                                            <img src="{{ url('upload/images', $room->publisher['image']) }}"
                                             class="profile-block-image img-fluid" alt="">
 
-                                            <p>Elsa
-                                                <strong>Influencer</strong>
+                                            <p>{{ $room->publisher['name']}}
+                                                <strong>{{ $room->publisher['r_area']['name']}}</strong>
                                             </p>
                                         </div>
 
-                                        <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                        <p class="mb-0">{{ $room->short_description }}</p>
 
                                         <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                                            <a href="#" class="bi-headphones me-1">
+                                            <a href="#" class="bi-person me-1">
                                                 <span>100k</span>
                                             </a>
 
@@ -69,75 +70,18 @@
                                                 <span>924k</span>
                                             </a>
                                         </div>
-                                    </div>
 
-                                    <div class="social-share d-flex flex-column ms-auto">
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-heart"></i>
-                                        </a>
-
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-bookmark"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-                                <div class="custom-block custom-block-full">
-                                    <div class="custom-block-image-wrap">
-                                        <a href="detail-page.html">
-                                            <img src="{{ url('assets/frontend/images/podcast/27670664_7369753.jpg') }}" class="custom-block-image img-fluid"
-                                            alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="custom-block-info">
-                                        <h5 class="mb-2">
-                                            <a href="detail-page.html">
-                                                Vintage Show
-                                            </a>
-                                        </h5>
-
-                                        <div class="profile-block d-flex">
-                                            <img src="{{ url('assets/frontend/images/profile/cute-smiling-woman-outdoor-portrait.jpg') }}"
-                                            class="profile-block-image img-fluid" alt="">
-
-                                            <p>
-                                                Taylor
-                                                <img src="{{ url('assets/frontend/images/verified.png') }}" class="verified-image img-fluid" alt="">
-                                                <strong>Creator</strong>
-                                            </p>
-                                        </div>
-
-                                        <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-
-                                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                                            <a href="#" class="bi-headphones me-1">
-                                                <span>100k</span>
-                                            </a>
-
-                                            <a href="#" class="bi-heart me-1">
-                                                <span>2.5k</span>
-                                            </a>
-
-                                            <a href="#" class="bi-chat me-1">
-                                                <span>924k</span>
-                                            </a>
+                                        <div class="mt-4 d-flex gap-4 border-top pt-2">
+                                            <a href="{{ route('user.room.edit', $room->id)}}"><i class="bi bi-pencil"></i> Edit</a>
+                                            <a href="javacript::void(0)" class="delete" data-id="{{ $room->id }}"> <i class="bi bi-archive"></i> Delete</a>
                                         </div>
                                     </div>
 
-                                    <div class="social-share d-flex flex-column ms-auto">
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-heart"></i>
-                                        </a>
-
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-bookmark"></i>
-                                        </a>
-                                    </div>
+                        
                                 </div>
                             </div>
+                            @endforeach
+                            
 
 
 

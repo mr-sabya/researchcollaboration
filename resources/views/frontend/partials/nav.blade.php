@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand me-lg-5 me-0" href="index.html">
+        <a class="navbar-brand me-lg-5 me-0" href="{{ route('index')}}">
             <img src="{{ url('assets/frontend/images/pod-talk-logo.png') }}" class="logo-image img-fluid" alt="templatemo pod talk">
         </a>
 
@@ -26,22 +26,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                        <li><a class="dropdown-item" href="listing-page.html">Listing Page</a></li>
-
-                        <li><a class="dropdown-item" href="detail-page.html">Detail Page</a></li>
-                    </ul>
+                    <a class="nav-link" href="about.html">Topics</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="about.html">Members</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Chat Rooms</a>
                 </li>
             </ul>
 

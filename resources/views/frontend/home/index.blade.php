@@ -11,7 +11,7 @@
                 <div class="text-center mb-5 pb-2">
                     <h1 class="">Share your Research</h1>
 
-                    <p class="">Shaer and complete your research.</p>
+                    <p class="">Share and complete your research.</p>
 
                     <a href="#section_2" class="btn custom-btn smoothscroll mt-3">Start Contrubuting</a>
                 </div>

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -81,5 +82,38 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('profile');
+	}
+
+
+
+	// setting
+	public function setting()
+	{
+		if(!Auth::user()){
+			return redirect()->route('user.login.form');
+		}
+
+		$user = User::where('id', Auth::user()->id)->first();
+
+		return view('frontend.profile.setting', compact('user'));
+	}
+
+
+	public function updatePassword(Request $request, $id)
+	{
+		$request->validate([
+            'current_password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::findOrFail(intval($id));
+
+        if(Hash::check($request->current_password, $user->password)){
+        	$user->password = Hash::make($request->password);
+        	$user->save();
+        	return redirect()->route('profile');
+        }else{
+        	return back()->with('error', 'Current password does not match');
+        }
 	}
 }

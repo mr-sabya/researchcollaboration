@@ -37,15 +37,28 @@ Route::get('profile/edit', [App\Http\Controllers\Frontend\ProfileController::cla
 
 Route::put('profile/update/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'updateProfile'])->name('profile.update');
 
+Route::get('profile/setting', [App\Http\Controllers\Frontend\ProfileController::class, 'setting'])->name('profile.setting');
+
+// update password
+Route::put('update/password/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'updatePassword'])->name('user.password.update');
+
 
 Route::get('profile/edit-image', [App\Http\Controllers\Frontend\ProfileController::class, 'profileImage'])->name('profile.image');
 
 
 Route::post('profile/edit-image/update', [App\Http\Controllers\Frontend\ProfileController::class, 'updateImage'])->name('profile.image.update');
 
+// user room
+
 Route::get('profile/room', [App\Http\Controllers\Frontend\RoomController::class, 'index'])->name('user.room');
 
 Route::get('profile/room/create', [App\Http\Controllers\Frontend\RoomController::class, 'create'])->name('user.room.create');
+
+Route::post('profile/room/store', [App\Http\Controllers\Frontend\RoomController::class, 'store'])->name('user.room.store');
+
+Route::get('profile/room/{id}', [App\Http\Controllers\Frontend\RoomController::class, 'edit'])->name('user.room.edit');
+
+Route::put('profile/room/update/{id}', [App\Http\Controllers\Frontend\RoomController::class, 'update'])->name('user.room.update');
 
 
 
