@@ -107,6 +107,13 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::findOrFail(intval($id));
+        
+        if($department->users->count() > 0){
+            return back()->with('error', 'You can not delete this data');
+        }else{
+            $department->delete();
+            return redirect()->route('admin.department.index')->with('success', 'Department has been deleted successfully');
+        }
     }
 }

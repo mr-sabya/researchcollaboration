@@ -25,7 +25,7 @@
                             <div class="col-lg-12 mb-4">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h4 class="m-0">Edit Room ({{ $room->name }} )</h4>
-                                    <a class="btn custom-btn smoothscroll" href="{{ route('user.room') }}">All Rooms</a>
+                                    <a class="btn custom-btn smoothscroll" href="{{ route('user.room.index') }}">All Rooms</a>
                                 </div>
                             </div>
 
@@ -84,7 +84,16 @@
                                         <input type="text" name="paper_link" class="form-control"  value="{{ $room->paper_link }}">
                                     </div>
 
-                                    <button class="btn custom-btn smoothscroll" type="submit">Add Room</button>
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="1">Running</option>
+                                            <option value="2">Closed</option>
+                                        </select>
+                                    </div>
+
+
+                                    <button class="btn custom-btn smoothscroll" type="submit">Update Room</button>
                                 </form>
                             </div>
 

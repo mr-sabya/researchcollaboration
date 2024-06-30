@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Room;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,59 +19,73 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('index');
+Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('index');
+
+
+Auth::routes();
+
+// room
+Route::get('research-rooms', [\App\Http\Controllers\Frontend\RoomController::class, 'index'])->name('room.index');
+Route::get('research-room/{id}', [\App\Http\Controllers\Frontend\RoomController::class, 'show'])->name('room.show');
+Route::get('research-room/request/{id}', [\App\Http\Controllers\Frontend\RoomController::class, 'joinChat'])->name('room.joinchat');
+Route::get('research-room/chat/{id}', [\App\Http\Controllers\Frontend\ChatController::class, 'index'])->name('room.chat');
+
+Route::get('topics', [\App\Http\Controllers\Frontend\TopicController::class, 'index'])->name('topic.index');
+Route::get('topics/{id}', [\App\Http\Controllers\Frontend\TopicController::class, 'show'])->name('topic.show');
+
+
+Route::post('search', [\App\Http\Controllers\Frontend\SearchController::class, 'search'])->name('search');
+
+Route::get('discipline/{id}', [\App\Http\Controllers\Frontend\DisciplineController::class, 'show'])->name('discipline.show');
+
+Route::get('members', [\App\Http\Controllers\Frontend\MemberController::class, 'index'])->name('member.index');
+Route::get('members/{id}', [\App\Http\Controllers\Frontend\MemberController::class, 'show'])->name('member.show');
+
+Route::get('notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notification.index');
+Route::get('notifications/{id}', [\App\Http\Controllers\NotificationController::class, 'show'])->name('notification.show');
+
+
+Route::prefix('profile')->group(function () {
+
+	Route::get('/', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'profile'])->name('profile');
+
+	Route::get('edit', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'updateProfilePage'])->name('profile.edit');
+
+	Route::put('update/{id}', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'updateProfile'])->name('profile.update');
+
+	Route::get('setting', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'setting'])->name('profile.setting');
+
+	// update password
+	Route::put('update/password/{id}', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'updatePassword'])->name('user.password.update');
+
+
+	Route::get('edit-image', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'profileImage'])->name('profile.image');
+
+
+	Route::post('edit-image/update', [\App\Http\Controllers\Frontend\Auth\ProfileController::class, 'updateImage'])->name('profile.image.update');
+
+	Route::resource('room', \App\Http\Controllers\Frontend\Auth\RoomController::class, ['names' => 'user.room']);
+
+	// approve room member
+	Route::get('room/member/approve/{id}', [\App\Http\Controllers\Frontend\Auth\ChatController::class, 'approveMember'])->name('profile.member.approve');
+
+
+	Route::post('chat/create', [\App\Http\Controllers\Frontend\Auth\ChatController::class, 'chat'])->name('chat.create');
+});
 
 
 
-Route::get('login', [App\Http\Controllers\Frontend\AuthController::class, 'showLoginForm'])->name('user.login.form');
-
-Route::post('login', [App\Http\Controllers\Frontend\AuthController::class, 'login'])->name('user.login');
-
-Route::get('register', [App\Http\Controllers\Frontend\AuthController::class, 'showRegisterForm'])->name('user.register.form');
-
-Route::post('register', [App\Http\Controllers\Frontend\AuthController::class, 'register'])->name('user.register');
-
-Route::post('logout', [App\Http\Controllers\Frontend\AuthController::class, 'logout'])->name('user.logout');
 
 
-Route::get('profile', [App\Http\Controllers\Frontend\ProfileController::class, 'profile'])->name('profile');
+Route::prefix('admin')->middleware('admin')->group(function () {
 
-Route::get('profile/edit', [App\Http\Controllers\Frontend\ProfileController::class, 'updateProfilePage'])->name('profile.edit');
+	Route::get('/', [\App\Http\Controllers\Backend\HomeController::class, 'index'])->name('dashboard');
 
-Route::put('profile/update/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'updateProfile'])->name('profile.update');
+	Route::get('users', [\App\Http\Controllers\Backend\UserController::class, 'index'])->name('admin.user.index');
 
-Route::get('profile/setting', [App\Http\Controllers\Frontend\ProfileController::class, 'setting'])->name('profile.setting');
+	Route::resource('department', \App\Http\Controllers\Backend\DepartmentController::class, ['names' => 'admin.department']);
 
-// update password
-Route::put('update/password/{id}', [App\Http\Controllers\Frontend\ProfileController::class, 'updatePassword'])->name('user.password.update');
+	Route::resource('research-area', \App\Http\Controllers\Backend\ResearchAreaController::class, ['names' => 'admin.research-area']);
 
-
-Route::get('profile/edit-image', [App\Http\Controllers\Frontend\ProfileController::class, 'profileImage'])->name('profile.image');
-
-
-Route::post('profile/edit-image/update', [App\Http\Controllers\Frontend\ProfileController::class, 'updateImage'])->name('profile.image.update');
-
-// user room
-
-Route::get('profile/room', [App\Http\Controllers\Frontend\RoomController::class, 'index'])->name('user.room');
-
-Route::get('profile/room/create', [App\Http\Controllers\Frontend\RoomController::class, 'create'])->name('user.room.create');
-
-Route::post('profile/room/store', [App\Http\Controllers\Frontend\RoomController::class, 'store'])->name('user.room.store');
-
-Route::get('profile/room/{id}', [App\Http\Controllers\Frontend\RoomController::class, 'edit'])->name('user.room.edit');
-
-Route::put('profile/room/update/{id}', [App\Http\Controllers\Frontend\RoomController::class, 'update'])->name('user.room.update');
-
-
-
-Route::prefix('admin')->group(function () {
-	Auth::routes();
-	Route::get('/', [App\Http\Controllers\Backend\HomeController::class, 'index'])->name('dashboard');
-
-	Route::resource('department', App\Http\Controllers\Backend\DepartmentController::class, ['names'=> 'admin.department']);
-
-	Route::resource('research-area', App\Http\Controllers\Backend\ResearchAreaController::class, ['names'=> 'admin.research-area']);
-
-	Route::resource('topic', App\Http\Controllers\Backend\TopicController::class, ['names'=> 'admin.topic']);
+	Route::resource('topic', \App\Http\Controllers\Backend\TopicController::class, ['names' => 'admin.topic']);
 });

@@ -9,7 +9,7 @@
 	<link rel="shortcut icon" href="{{ asset('assets/backend/images/favicon.png') }}" type="image/x-icon">
 	<link rel="icon" href="{{ asset('assets/backend/images/favicon.ico') }}" type="image/x-icon">
 
-	<title>Quantum Able Bootstrap 4 Admin Dashboard Template</title>
+	<title>Admin Dashboard - Research Collaboration</title>
 
 	<!-- Google font-->
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
@@ -25,9 +25,6 @@
 
 	<!-- Required Fremwork -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/plugins/bootstrap/css/bootstrap.min.css') }}">
-
-	
-
 
 
 	<!-- Style.css -->
@@ -49,7 +46,7 @@
 		<!-- Side-Nav-->
 		@include('backend.partials.sidebar')
 		<!-- Sidebar chat start -->
-		
+
 		<div class="content-wrapper">
 			<!-- Container-fluid starts -->
 			<!-- Main content starts -->
@@ -58,14 +55,30 @@
 					<div class="main-header">
 						<h4>Dashboard</h4>
 					</div>
+
+					@if(Session::has('error'))
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						{{ Session::get('error')}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					@elseif(Session::has('success'))
+					<div class="alert alert-success alert-dismissible" role="alert">
+						{{ Session::get('success')}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					@endif
 				</div>
 				@yield('content')
 
-				
+
 			</div>
 			<!-- Main content ends -->
 			<!-- Container-fluid ends -->
-			
+
 		</div>
 	</div>
 
@@ -88,9 +101,7 @@
 	<!-- notification -->
 	<script src="{{ asset('assets/backend/plugins/notification/js/bootstrap-growl.min.js') }}"></script>
 
-	
 
-	
 
 	<!-- custom js -->
 	<script type="text/javascript" src="{{ asset('assets/backend/js/main.min.js') }}"></script>
@@ -100,7 +111,7 @@
 
 
 	@yield('scripts')
-	
+
 
 </body>
 

@@ -20,7 +20,7 @@
             @include('frontend.profile.partials.menu')
             <div class="col-lg-9">
 
-                <form  action="{{ route('profile.update', $user->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('profile.update', $user->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -30,6 +30,23 @@
                         <small style="color: red">{{ $errors->first('name') }}</small>
                         @endif
                     </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{ $user->phone }}">
+                        @if($errors->has('phone'))
+                        <small style="color: red">{{ $errors->first('phone') }}</small>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea name="address" id="address" class="form-control">{{ $user->address }}</textarea>
+                        @if($errors->has('address'))
+                        <small style="color: red">{{ $errors->first('address') }}</small>
+                        @endif
+                    </div>
+
+                    <hr>
+
                     <div class="form-group">
                         <label>Department</label>
                         <select class="form-control" name="department_id">
@@ -43,10 +60,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Research Area</label>
-                        <select class="form-control" name="r_area_id">
-                            @foreach($areas as $area)
-                            <option value="{{ $area->id }}" {{ $area->id == $user->r_area_id ? 'selected' : ''}}>{{ $area->name }}</option>
+                        <label>Topics</label>
+                        <select class="form-control" name="topics[]" id="topics" multiple>
+                            @foreach($topics as $topic)
+                            <option value="{{ $topic->id }}" {{ $user->checkTopic($topic->id) ? 'selected' : '' }}>{{ $topic->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('r_area_id'))
@@ -117,12 +134,19 @@
 
 @section('scripts')
 <script>
-
     $('#description').summernote({
         placeholder: 'Your description here.....',
         tabsize: 2,
         height: 300,
     });
-    
+
+
+    $(document).ready(function() {
+        $('#topics').select2({
+            placeholder: 'Select Topics',
+            allowClear: true
+
+        });
+    });
 </script>
 @endsection

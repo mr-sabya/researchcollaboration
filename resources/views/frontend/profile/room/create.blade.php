@@ -25,7 +25,7 @@
                             <div class="col-lg-12 mb-4">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h4 class="m-0">Add New Room</h4>
-                                    <a class="btn custom-btn smoothscroll" href="{{ route('user.room') }}">All Rooms</a>
+                                    <a class="btn custom-btn smoothscroll" href="{{ route('user.room.index') }}">All Rooms</a>
                                 </div>
                             </div>
 
@@ -34,7 +34,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" id="name" class="form-control">
+                                        <input type="text" name="name" id="name" class="form-control"  value="{{ old('name') }}">
                                         @if($errors->has('name'))
                                         <small style="color: red">{{ $errors->first('name') }}</small>
                                         @endif
@@ -63,7 +63,7 @@
 
                                     <div class="form-group">
                                         <label>Short Description</label>
-                                        <textarea class="form-control" cols="20" name="short_description" id="short_description" rows="3"></textarea>
+                                        <textarea class="form-control" cols="20" name="short_description" id="short_description" rows="3">{{ old('short_description') }}</textarea>
                                         @if($errors->has('short_description'))
                                         <small style="color: red">{{ $errors->first('short_description') }}</small>
                                         @endif
@@ -72,7 +72,7 @@
 
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea class="form-control" name="description" id="description"></textarea>
+                                        <textarea class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
                                         @if($errors->has('description'))
                                         <small style="color: red">{{ $errors->first('description') }}</small>
                                         @endif

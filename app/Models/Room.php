@@ -26,4 +26,15 @@ class Room extends Model
     {
     	return $this->belongsTo('App\Models\User', 'user_id');
     }
+
+
+    public function members()
+    {
+        return $this->belongsToMany('App\Models\User' ,'room_members');
+    }
+
+    public function topic()
+    {
+        return $this->belongsTo('App\Models\Topic' ,'topic_id');
+    }
 }

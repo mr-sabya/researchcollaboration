@@ -42,6 +42,10 @@
                             <td>{{ Auth::user()->phone }}</td>
                         </tr>
                         <tr>
+                            <td>Address</td>
+                            <td>{{ Auth::user()->address }}</td>
+                        </tr>
+                        <tr>
                             <td>Department</td>
                             <td>
                                 @if(Auth::user()->department_id != null)
@@ -52,13 +56,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Research Area</td>
+                            <td>Topics</td>
                             <td>
-                                @if(Auth::user()->r_area != null)
-                                {{ Auth::user()->r_area['name'] }}
-                                @else
-                                <span style="color: #878787">Not Set Yet!</span>
-                                @endif
+                                @foreach($user->topics as $topic)
+                                <span class="badge bg-primary">{{ $topic->name }}</span>
+                                @endforeach 
                             </td>
                         </tr>
 

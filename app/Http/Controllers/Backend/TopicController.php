@@ -134,6 +134,13 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $topic =  Topic::findOrFail(intval($id));
+        
+        if($topic->rooms->count() > 0){
+            return back()->with('error', 'You can not delete this data');
+        }else{
+            $topic->delete();
+            return redirect()->route('admin.topic.index')->with('success', 'Topic has been deleted suceesfully');
+        }
     }
 }

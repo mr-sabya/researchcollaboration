@@ -2,94 +2,99 @@
 
 @section('content')
 
-<header class="header d-flex flex-column justify-content-center align-items-center">
+
+<section class="hero-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-12 text-center">
-                <h2 class="mb-0">Chat Room</h2>
+            <div class="col-lg-12 col-12">
+                <div class="text-center pb-2">
+                    <h1 class="">Research Rooms</h1>
+                </div>
             </div>
-
         </div>
     </div>
-</header>
+</section>
 
 
-<section class="about-section section-padding">
+
+
+<section class="trending-podcast-section section-padding">
     <div class="container">
         <div class="row">
-            @include('frontend.profile.partials.menu')
-            <div class="col-lg-9">
-                <div class="trending-podcast-section">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 mb-4">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h4 class="m-0">{{ $rooms->count() }} {{ $rooms->count() == 1 ? 'Room' : 'Rooms' }}</h4>
-                                    <a class="btn custom-btn smoothscroll" href="{{ route('user.room.create') }}">Create Room</a>
-                                </div>
-                            </div>
 
-                            @foreach($rooms as $room)
-                            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-                                <div class="custom-block custom-block-full">
-                                    <div class="custom-block-image-wrap">
-                                        <a href="detail-page.html">
-                                            <img src="{{ url('upload/images', $room->image) }}" class="custom-block-image img-fluid"
-                                            alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="custom-block-info">
-                                        <h5 class="mb-2">
-                                            <a href="detail-page.html">
-                                                {{ str_limit($room->name, $limit = 20, $end = '...') }}
-                                            </a>
-                                        </h5>
-
-                                        <div class="profile-block d-flex">
-                                            <img src="{{ url('upload/images', $room->publisher['image']) }}"
-                                            class="profile-block-image img-fluid" alt="">
-
-                                            <p>{{ $room->publisher['name']}}
-                                                <strong>{{ $room->publisher['r_area']['name']}}</strong>
-                                            </p>
-                                        </div>
-
-                                        <p class="mb-0">{{ $room->short_description }}</p>
-
-                                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                                            <a href="#" class="bi-person me-1">
-                                                <span>100k</span>
-                                            </a>
-
-                                            <a href="#" class="bi-heart me-1">
-                                                <span>2.5k</span>
-                                            </a>
-
-                                            <a href="#" class="bi-chat me-1">
-                                                <span>924k</span>
-                                            </a>
-                                        </div>
-
-                                        <div class="mt-4 d-flex gap-4 border-top pt-2">
-                                            <a href="{{ route('user.room.edit', $room->id)}}"><i class="bi bi-pencil"></i> Edit</a>
-                                            <a href="javacript::void(0)" class="delete" data-id="{{ $room->id }}"> <i class="bi bi-archive"></i> Delete</a>
-                                        </div>
-                                    </div>
-
-                        
-                                </div>
-                            </div>
-                            @endforeach
-                            
-
-
-
-                        </div>
-                    </div>
+            <div class="col-lg-12 col-12">
+                <div class="section-title-wrap mb-5">
+                    <h4 class="section-title">Latest Research Chat Rooms </h4>
                 </div>
-
             </div>
+
+            @foreach($rooms as $room)
+            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                <div class="custom-block custom-block-full mb-4">
+                    <div class="custom-block-image-wrap">
+                        @auth
+                        <a href="{{ $room->user_id == Auth::user()->id ? route('user.room.show', $room->id) :  route('room.show', $room->id)}}">
+                            <img src="{{ url('upload/images', $room->image) }}" class="custom-block-image img-fluid" alt="">
+                        </a>
+                        @else
+                        <a href="{{ route('room.show', $room->id)}}">
+                            <img src="{{ url('upload/images', $room->image) }}" class="custom-block-image img-fluid" alt="">
+                        </a>
+                        @endauth
+                    </div>
+
+                    <div class="custom-block-info">
+                        @if($room->status == 1)
+                        <span class="badge bg-success mb-2">Running</span>
+                        @elseif($room->status == 2)
+                        <span class="badge bg-danger mb-2">Closed</span>
+                        @endif
+                        <h5 class="mb-2">
+                            @auth
+                            <a href="{{ $room->user_id == Auth::user()->id ? route('user.room.show', $room->id) :  route('room.show', $room->id)}}">
+                                {{ str_limit($room->name, $limit = 18, $end = '...') }}
+                            </a>
+                            @else
+                            <a href="{{ route('room.show', $room->id)}}">
+                                {{ str_limit($room->name, $limit = 18, $end = '...') }}
+                            </a>
+                            @endauth
+                        </h5>
+
+                        <div class="profile-block d-flex">
+                            <img src="{{ url('upload/images', $room->publisher['image']) }}" class="profile-block-image img-fluid" alt="">
+
+                            <p>{{ $room->publisher['name']}}
+                                <strong>{{ date('d F, Y', strtotime($room->created_at)) }}</strong>
+                            </p>
+                        </div>
+
+                        <p class="mb-0">{{ $room->short_description }}</p>
+
+                        <!-- <div class="custom-block-bottom d-flex justify-content-between mt-3">
+                            <a href="#" class="bi-person me-1">
+                                <span>100k</span>
+                            </a>
+
+                            <a href="#" class="bi-heart me-1">
+                                <span>2.5k</span>
+                            </a>
+
+                            <a href="#" class="bi-chat me-1">
+                                <span>924k</span>
+                            </a>
+                        </div> -->
+
+
+                    </div>
+
+
+                </div>
+            </div>
+            @endforeach
+
+            {{ $rooms->links() }}
+
         </div>
     </div>
 </section>

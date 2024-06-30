@@ -24,6 +24,7 @@ class User extends Authenticatable
         'r_area_id',
         'email',
         'phone',
+        'address',
         'image',
         'password',
         'short_bio',
@@ -60,8 +61,32 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Department', 'department_id');
     }
 
-    public function r_area()
+
+    public function rooms()
     {
-        return $this->belongsTo('App\Models\Area', 'r_area_id');
+        return $this->belongsToMany('App\Models\Room' ,'room_members');
+    }
+
+    public function topics()
+    {
+        return $this->belongsToMany('App\Models\Topic');
+    }
+
+    public function checkTopic($id){
+        $topic = $this->topics()->where('topic_id', $id)->first();
+        if($topic){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function checkRoom($id){
+        $room = $this->rooms()->where('room_id', $id)->first();
+        if($room){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

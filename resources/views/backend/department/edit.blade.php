@@ -7,7 +7,7 @@
 	<div class="col-lg-4">
 		<div class="card">
 			<div class="card-block">
-				<h5>Edit Department</h5>
+				<h5>Edit Discipline</h5>
 				<form action="{{ route('admin.department.update', $department->id)}}" method="post">
 					@csrf
 					@method('PUT')

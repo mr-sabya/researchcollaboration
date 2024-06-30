@@ -42,6 +42,10 @@
 	<div class="col-lg-8">
 		<div class="card">
 			<div class="card-block">
+
+				
+
+
 				<h5>Research Area List</h5>
 				<div class="table-responsive">
 					<table class="table table-bordered">
@@ -64,7 +68,7 @@
 								<td>
 									<form>
 										<a href="{{ route('admin.topic.edit', $topic->id)}}" class="btn btn-primary btn-sm">Edit</a>
-										<button class="btn btn-danger btn-sm">Delete</button>
+										<button type="button" data-url="{{ route('admin.topic.destroy', $topic->id) }}" class="delete btn btn-danger btn-sm">Delete</button>
 									</form>
 								</td>
 							</tr>
@@ -75,10 +79,34 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 </div>
 <!-- 1-3-block row end -->
+
+<div class="modal fade" id="delete_modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Confimation</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="" id="delete_form" method="post">
+				@csrf
+				@method('DELETE')
+				<div class="modal-body">
+					<h2 class="text-center">Do you want to delete this data?</h2>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Delete</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 @endsection
 
 
@@ -87,8 +115,14 @@
 	$("#name").keyup(function() {
 		var Text = $(this).val();
 		Text = Text.toLowerCase();
-		Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
-		$("#slug").val(Text);        
+		Text = Text.replace(/[^a-zA-Z0-9]+/g, '-');
+		$("#slug").val(Text);
+	});
+
+	$(document).on('click', '.delete', function() {
+		$('#delete_modal').modal('show');
+		var url = $(this).attr('data-url');
+		$('#delete_form').attr('action', url);
 	});
 </script>
 @endsection

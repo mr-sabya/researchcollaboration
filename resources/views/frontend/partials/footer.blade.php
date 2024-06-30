@@ -7,8 +7,7 @@
                     <h6>Subscribe. Every weekly.</h6>
 
                     <form class="custom-form subscribe-form" action="#" method="get" role="form">
-                        <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                        class="form-control" placeholder="Email Address" required="">
+                        <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email Address" required="">
 
                         <div class="col-lg-12 col-12">
                             <button type="submit" class="form-control" id="submit">Subscribe</button>
@@ -93,10 +92,8 @@
             </div>
 
             <div class="col-lg-3 col-12">
-                <p class="copyright-text mb-0">Copyright © 2036 Talk Pod Company
-                    <br><br>
-                    Design: <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>
-                </p> Distribution: <a rel="nofollow" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                <p class="copyright-text mb-0">Copyright © 2036 Research Colaboration
+                </p>
             </div>
         </div>
     </div>

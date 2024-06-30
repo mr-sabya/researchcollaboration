@@ -30,6 +30,8 @@
     <!-- summernote -->
     <link href="{{ asset('assets/frontend/summernote/summernote-lite.min.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/templatemo-pod-talk.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/custom.css') }}">
@@ -56,6 +58,8 @@
     <script src="{{ asset('assets/frontend/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/summernote/summernote-lite.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @yield('scripts')
     <script src="{{ asset('assets/frontend/js/custom.js') }}"></script>
