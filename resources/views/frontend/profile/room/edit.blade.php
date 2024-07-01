@@ -34,14 +34,14 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label>Name</label>
+                                        <label>Name<span class="text-danger">*</span></label>
                                         <input type="text" name="name" id="name" class="form-control" value="{{ $room->name }}">
                                         @if($errors->has('name'))
                                         <small style="color: red">{{ $errors->first('name') }}</small>
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label>Topic</label>
+                                        <label>Topic<span class="text-danger">*</span></label>
                                         <select class="form-control" name="topic_id" id="topic_id">
                                             <option value="" selected disabled>--select topic--</option>
                                             @foreach($topics as $topic)
@@ -54,7 +54,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image<span class="text-danger">*</span></label>
                                         <input type="file" name="image" id="image" class="form-control">
                                         <small>Image must be 300*300px | Image <a href="{{ url('upload/images', $room->image)}}" target="_blank">{{ url('upload/images', $room->image)}}</a></small><br>
                                         @if($errors->has('image'))
@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Short Description</label>
+                                        <label>Short Description<span class="text-danger">*</span></label>
                                         <textarea class="form-control" cols="20" name="short_description" id="short_description" rows="3">{{ $room->short_description }}</textarea>
                                         @if($errors->has('short_description'))
                                         <small style="color: red">{{ $errors->first('short_description') }}</small>
@@ -72,7 +72,7 @@
 
 
                                     <div class="form-group">
-                                        <label>Description</label>
+                                        <label>Description<span class="text-danger">*</span></label>
                                         <textarea class="form-control" name="description" id="description">{!! $room->description !!}</textarea>
                                         @if($errors->has('description'))
                                         <small style="color: red">{{ $errors->first('description') }}</small>

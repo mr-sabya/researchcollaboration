@@ -59,7 +59,7 @@
                             <img src="{{ url('upload/images', $room->publisher['image']) }}" class="profile-block-image img-fluid" alt="">
 
                             <p>{{ $room->publisher['name']}}
-                                <strong>{{ $room->publisher['r_area']['name']}}</strong>
+                                <strong>{{ date('d F, Y', strtotime($room->created_at)) }}</strong>
                             </p>
                         </div>
 
