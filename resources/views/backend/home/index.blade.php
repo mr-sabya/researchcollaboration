@@ -13,15 +13,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-3 col-md-6">
-		<div class="card dashboard-product">
-			<span>Research Areas</span>
-			<h2 class="dashboard-total-products">{{ App\Models\Area::count() }}</h2>
-			<div class="side-box ">
-				<i class="ti-gift text-primary-color"></i>
-			</div>
-		</div>
-	</div>
+	
 	<div class="col-lg-3 col-md-6">
 		<div class="card dashboard-product">
 			<span>Topics</span>

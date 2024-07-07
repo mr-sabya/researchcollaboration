@@ -15,10 +15,14 @@ class CreateRoomMembersTable extends Migration
     {
         Schema::create('room_members', function (Blueprint $table) {
             $table->id();
-            $table->integer('room_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('user_id');
+
             $table->boolean('is_approved')->default(0);
             $table->integer('added_by')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }

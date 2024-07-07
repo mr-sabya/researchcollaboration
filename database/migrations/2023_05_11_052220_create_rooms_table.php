@@ -15,16 +15,23 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('topic_id');
+
             $table->string('name');
             $table->string('slug')->unique();
-            $table->integer('topic_id');
             $table->string('image');
             $table->string('cover')->nullable();
             $table->string('short_description');
             $table->text('description');
             $table->string('paper_link')->nullable();
             $table->boolean('status')->default(1);
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

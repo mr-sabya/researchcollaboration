@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('department_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address')->nullable();
@@ -32,6 +32,10 @@ class CreateUsersTable extends Migration
             $table->string('stackoverflow')->nullable();
 
             $table->boolean('is_admin')->default(0);
+
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+
+
             $table->rememberToken();
             $table->timestamps();
         });
